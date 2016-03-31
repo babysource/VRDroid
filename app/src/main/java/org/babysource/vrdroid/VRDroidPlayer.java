@@ -16,10 +16,28 @@ import org.rajawali3d.vr.VRActivity;
  */
 public class VRDroidPlayer extends VRActivity {
 
+    private VRDroidRender mMediaRender;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setRenderer(new VRDroidRender(this));
+        this.setRenderer(this.mMediaRender = new VRDroidRender(this));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (this.mMediaRender != null) {
+            this.mMediaRender.onPause();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (this.mMediaRender != null) {
+            this.mMediaRender.onResume();
+        }
     }
 
 }
