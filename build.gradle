@@ -10,7 +10,6 @@ buildscript {
 allprojects {
     repositories {
         maven { url 'http://maven.oschina.net/content/groups/public/' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 }
 

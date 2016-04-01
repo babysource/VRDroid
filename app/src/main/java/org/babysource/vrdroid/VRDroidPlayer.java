@@ -3,10 +3,16 @@
  */
 package org.babysource.vrdroid;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 
-import org.babysource.vrdroid.render.VRDroidRender;
-import org.rajawali3d.vr.VRActivity;
+import com.google.vrtoolkit.cardboard.widgets.video.VrVideoEventListener;
+import com.google.vrtoolkit.cardboard.widgets.video.VrVideoView;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * VR资源播放
@@ -14,29 +20,51 @@ import org.rajawali3d.vr.VRActivity;
  *
  * @author Wythe
  */
-public class VRDroidPlayer extends VRActivity {
+public class VRDroidPlayer extends FragmentActivity {
 
-    private VRDroidRender mMediaRender;
+    private VrVideoView mVrVideoView;
 
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.setRenderer(this.mMediaRender = new VRDroidRender(this));
+    protected void onDestroy() {
+        if (this.mVrVideoView != null) {
+            this.mVrVideoView.shutdown();
+        }
+        super.onDestroy();
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
-        if (this.mMediaRender != null) {
-            this.mMediaRender.onPause();
+        if (this.mVrVideoView != null) {
+            this.mVrVideoView.pauseRendering();
         }
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
-        if (this.mMediaRender != null) {
-            this.mMediaRender.onResume();
+        if (this.mVrVideoView != null) {
+            this.mVrVideoView.resumeRendering();
+        }
+    }
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.droid_player);
+        this.mVrVideoView = (VrVideoView) this.findViewById(R.id.vr_video_view);
+        if (this.mVrVideoView != null) {
+            this.mVrVideoView.setInfoButtonEnabled(false);
+            this.mVrVideoView.setEventListener(new VrVideoEventListener() {
+
+            });
+            try {
+                this.mVrVideoView.loadVideo(Uri.fromFile(
+                        new File(Environment.getExternalStorageDirectory() + File.separator + "360Videos/362.czvr")
+                ));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
