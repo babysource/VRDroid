@@ -10,18 +10,23 @@
         android:background="@color/colorPrimary">
 
         <TextView
-            android:id="@+id/tv_video_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:text="@string/app_list"
             android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 
     </FrameLayout>
 
-    <com.google.vrtoolkit.cardboard.widgets.video.VrVideoView
-        android:id="@+id/vr_video_view"
+    <ListView
+        android:id="@+id/vr_video_list"
         android:layout_width="match_parent"
-        android:layout_height="250dip" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:divider="@color/colorDivide"
+        android:dividerHeight="1dp"
+        android:listSelector="@null" />
 
 </LinearLayout>

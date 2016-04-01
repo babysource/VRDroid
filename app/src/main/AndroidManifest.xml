@@ -19,12 +19,19 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".VRDroidPlayer"
-            android:screenOrientation="landscape">
+            android:name=".VRDroidLister"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".VRDroidPlayer"
+            android:immersive="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
                 <category android:name="com.google.intent.category.CARDBOARD" />
             </intent-filter>
         </activity>
