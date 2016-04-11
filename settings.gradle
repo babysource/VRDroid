@@ -1,4 +1,5 @@
 include ':app'
+include ':app-malivr'
 include ':app-rajawali'
 include ':libraries:core'
 include ':libraries:audio'

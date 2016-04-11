@@ -1,33 +1,35 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.model.application'
 
-android {
-    compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+model {
+    android {
+        compileSdkVersion = 23
+        buildToolsVersion = '23.0.3'
 
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 23
+        defaultConfig {
+            minSdkVersion.apiLevel = 16
+            targetSdkVersion.apiLevel = 23
+        }
     }
 
-    buildTypes {
+    android.buildTypes {
         debug {
-            debuggable true
-            minifyEnabled false
-            multiDexEnabled false
-            shrinkResources false
-            zipAlignEnabled true
+            debuggable = true
+            minifyEnabled = false
+            multiDexEnabled = false
+            shrinkResources = false
+            zipAlignEnabled = true
         }
         release {
-            debuggable false
-            minifyEnabled false
-            multiDexEnabled false
-            shrinkResources true
-            zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable = false
+            minifyEnabled = false
+            multiDexEnabled = false
+            shrinkResources = true
+            zipAlignEnabled = true
+            proguardFiles.add(file('proguard-rules.pro'))
         }
     }
 
-    packagingOptions {
+    android.packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/LICENSE'
@@ -35,8 +37,8 @@ android {
         exclude 'META-INF/NOTICE'
     }
 
-    lintOptions {
-        abortOnError false
+    android.lintOptions {
+        abortOnError = false
     }
 }
 
