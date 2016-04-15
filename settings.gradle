@@ -1,6 +1,7 @@
 include ':app'
 include ':app-malivr'
 include ':app-rajawali'
+include ':app-vrwidget'
 include ':libraries:core'
 include ':libraries:audio'
 include ':libraries:common'

@@ -2,19 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.babysource.vrdroid">
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- Make accelerometer and gyroscope hard requirements for good head tracking. -->
-    <uses-feature
-        android:name="android.hardware.sensor.accelerometer"
-        android:required="true" />
-
-    <uses-feature
-        android:name="android.hardware.sensor.gyroscope"
-        android:required="true" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -30,12 +20,18 @@
 
         <activity
             android:name=".VRDroidLister"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".VRDroidPlayer"
+            android:immersive="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
                 <category android:name="com.google.intent.category.CARDBOARD" />
             </intent-filter>
         </activity>

@@ -43,8 +43,7 @@ model {
 }
 
 dependencies {
+    compile project(':libraries:core')
     compile project(':libraries:common')
-    compile project(':libraries:videowidget')
-    compile project(':libraries:commonwidget')
     compile 'com.android.support:appcompat-v7:23.2.1'
 }
