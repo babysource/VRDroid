@@ -6,7 +6,8 @@ model {
         buildToolsVersion = '23.0.3'
 
         defaultConfig {
-            minSdkVersion.apiLevel = 16
+            applicationId = 'com.babysource.vrdroid.camera'
+            minSdkVersion.apiLevel = 21
             targetSdkVersion.apiLevel = 23
         }
     }

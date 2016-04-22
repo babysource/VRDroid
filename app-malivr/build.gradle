@@ -6,6 +6,7 @@ model {
         buildToolsVersion = '23.0.3'
 
         defaultConfig.with {
+            applicationId = 'com.babysource.vrdroid.malivr'
             minSdkVersion.apiLevel = 16
             targetSdkVersion.apiLevel = 23
         }

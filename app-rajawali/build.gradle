@@ -6,6 +6,7 @@ model {
         buildToolsVersion = '23.0.3'
 
         defaultConfig {
+            applicationId = 'com.babysource.vrdroid.rajawali'
             minSdkVersion.apiLevel = 16
             targetSdkVersion.apiLevel = 23
         }

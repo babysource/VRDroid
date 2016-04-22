@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">VRDroid</string>
+    <string name="app_name">VRDroid-Camera</string>
+    <string name="app_logout">继续按返回键退出</string>
 </resources>
