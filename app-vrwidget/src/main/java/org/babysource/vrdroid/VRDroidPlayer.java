@@ -48,7 +48,7 @@ public class VRDroidPlayer extends FragmentActivity {
     protected void onPause() {
         super.onPause();
         if (this.mVrVideoView != null) {
-            this.mVrVideoView.pauseRendering();
+            this.mVrVideoView.pauseVideo();
         }
     }
 
@@ -56,7 +56,7 @@ public class VRDroidPlayer extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         if (this.mVrVideoView != null) {
-            this.mVrVideoView.resumeRendering();
+            this.mVrVideoView.playVideo();
         }
     }
 
