@@ -39,6 +39,7 @@ public class VRDroidPlayer extends FragmentActivity {
     @Override
     protected void onDestroy() {
         if (this.mVrVideoView != null) {
+            this.mVrVideoView.pauseRendering();
             this.mVrVideoView.shutdown();
         }
         super.onDestroy();
