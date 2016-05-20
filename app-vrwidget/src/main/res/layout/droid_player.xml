@@ -19,7 +19,7 @@
 
     </FrameLayout>
 
-    <com.google.vrtoolkit.cardboard.widgets.video.VrVideoView
+    <com.google.vr.sdk.widgets.video.VrVideoView
         android:id="@+id/vr_video_view"
         android:layout_width="match_parent"
         android:layout_height="250dip" />

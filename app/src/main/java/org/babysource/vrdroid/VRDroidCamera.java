@@ -10,16 +10,15 @@ import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
-import com.google.vrtoolkit.cardboard.CardboardActivity;
-import com.google.vrtoolkit.cardboard.CardboardView;
-import com.google.vrtoolkit.cardboard.Eye;
-import com.google.vrtoolkit.cardboard.HeadTransform;
-import com.google.vrtoolkit.cardboard.Viewport;
+import com.google.vr.sdk.base.Eye;
+import com.google.vr.sdk.base.GvrActivity;
+import com.google.vr.sdk.base.GvrView;
+import com.google.vr.sdk.base.HeadTransform;
+import com.google.vr.sdk.base.Viewport;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -35,7 +34,7 @@ import javax.microedition.khronos.egl.EGLConfig;
  *
  * @author Wythe
  */
-public class VRDroidCamera extends CardboardActivity implements CardboardView.StereoRenderer, SurfaceTexture.OnFrameAvailableListener, Camera.FaceDetectionListener {
+public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer, Camera.FaceDetectionListener {
 
     private final float[] mRes = new float[16];
 
@@ -55,9 +54,7 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
 
     private FloatBuffer mFrameBuffer;
 
-    private CardboardView mCardboardView;
-
-    private GLSurfaceView mGLSurfaceView;
+    private GvrView mGvrView;
 
     private SurfaceTexture mCameraTexture;
 
@@ -65,31 +62,30 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.droid_lister);
-        this.mCardboardView = (CardboardView) this.findViewById(R.id.cardboard_view);
-        if (this.mCardboardView != null) {
-            this.setCardboardView(this.mCardboardView);
+        this.mGvrView = (GvrView) this.findViewById(R.id.gvr_view);
+        if (this.mGvrView != null) {
+            this.setGvrView(this.mGvrView);
             // 设置视图
-            this.mCardboardView.setRenderer(this);
-            this.mCardboardView.setVRModeEnabled(true);
-            this.mCardboardView.setTransitionViewEnabled(true);
-            this.mCardboardView.setSettingsButtonEnabled(false);
-            this.mGLSurfaceView = this.mCardboardView.getGLSurfaceView();
+            this.mGvrView.setRenderer(this);
+            this.mGvrView.setVRModeEnabled(true);
+            this.mGvrView.setTransitionViewEnabled(true);
+            this.mGvrView.setSettingsButtonEnabled(false);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (this.mCardboardView != null) {
-            this.mCardboardView.onPause();
+        if (this.mGvrView != null) {
+            this.mGvrView.onPause();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (this.mCardboardView != null) {
-            this.mCardboardView.onResume();
+        if (this.mGvrView != null) {
+            this.mGvrView.onResume();
         }
     }
 
@@ -112,11 +108,8 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
     }
 
     @Override
-    public void onNewFrame(final HeadTransform headTransform) {
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-        if (this.mCameraTexture != null) {
-            this.mCameraTexture.updateTexImage();
-        }
+    public void onRendererShutdown() {
+        this.shutCamera();
     }
 
     @Override
@@ -142,17 +135,15 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
     }
 
     @Override
-    public void onRendererShutdown() {
-        this.shutCamera();
+    public void onNewFrame(final HeadTransform headTransform) {
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        if (this.mCameraTexture != null) {
+            this.mCameraTexture.updateTexImage();
+        }
     }
 
     @Override
     public void onFinishFrame(final Viewport viewport) {
-
-    }
-
-    @Override
-    public void onSurfaceChanged(final int i, final int i1) {
 
     }
 
@@ -184,15 +175,13 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
     }
 
     @Override
-    public void onFrameAvailable(final SurfaceTexture surfaceTexture) {
-        if (this.mGLSurfaceView != null) {
-            this.mGLSurfaceView.requestRender();
-        }
+    public void onSurfaceChanged(final int i0, final int i1) {
+
     }
 
     @Override
     public void onFaceDetection(final Camera.Face[] faces, final Camera camera) {
-        final int wide = this.mCardboardView.getWidth() / 2, high = this.mCardboardView.getHeight();
+        final int wide = this.mGvrView.getWidth() / 2, high = this.mGvrView.getHeight();
         if (wide > 0 && high > 0) {
             final RectF rectf = new RectF();
             for (final Camera.Face face : faces) {
@@ -212,7 +201,6 @@ public class VRDroidCamera extends CardboardActivity implements CardboardView.St
                 this.mCameraTexture = new SurfaceTexture(
                         this.mTarget = VRDroidBuilder.createTexture()
                 );
-                this.mCameraTexture.setOnFrameAvailableListener(this);
                 try {
                     this.mCamera.setPreviewTexture(this.mCameraTexture);
                 } catch (IOException e) {

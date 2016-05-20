@@ -44,7 +44,7 @@ model {
 }
 
 dependencies {
-    compile project(':libraries:core')
+    compile project(':libraries:base')
     compile project(':libraries:common')
     compile 'com.android.support:appcompat-v7:23.2.1'
 }

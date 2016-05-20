@@ -9,8 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.google.vrtoolkit.cardboard.widgets.video.VrVideoEventListener;
-import com.google.vrtoolkit.cardboard.widgets.video.VrVideoView;
+import com.google.vr.sdk.widgets.video.VrVideoEventListener;
+import com.google.vr.sdk.widgets.video.VrVideoView;
 
 import java.io.File;
 import java.io.IOException;

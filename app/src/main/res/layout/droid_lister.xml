@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.vrtoolkit.cardboard.CardboardView
-        android:id="@+id/cardboard_view"
+    <com.google.vr.sdk.base.GvrView
+        android:id="@+id/gvr_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

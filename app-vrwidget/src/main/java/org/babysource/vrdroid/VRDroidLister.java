@@ -21,8 +21,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.vrtoolkit.cardboard.widgets.video.VrVideoView;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
