@@ -5,8 +5,6 @@ package org.babysource.vrdroid;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Matrix;
-import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLES20;
@@ -34,7 +32,7 @@ import javax.microedition.khronos.egl.EGLConfig;
  *
  * @author Wythe
  */
-public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer, Camera.FaceDetectionListener {
+public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer {
 
     private final float[] mRes = new float[16];
 
@@ -144,7 +142,6 @@ public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer
 
     @Override
     public void onFinishFrame(final Viewport viewport) {
-
     }
 
     @Override
@@ -176,31 +173,15 @@ public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer
 
     @Override
     public void onSurfaceChanged(final int i0, final int i1) {
-
-    }
-
-    @Override
-    public void onFaceDetection(final Camera.Face[] faces, final Camera camera) {
-        final int wide = this.mGvrView.getWidth() / 2, high = this.mGvrView.getHeight();
-        if (wide > 0 && high > 0) {
-            final RectF rectf = new RectF();
-            for (final Camera.Face face : faces) {
-                final Matrix matrix = new Matrix();
-                matrix.postScale(wide / 2000F, high / 2000F);
-                matrix.postTranslate(wide / 2F, high / 2F);
-                rectf.set(face.rect);
-                matrix.mapRect(rectf);
-            }
-        }
     }
 
     private void openCamera() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             this.mCamera = Camera.open();
             if (this.mCamera != null) {
-                this.mCameraTexture = new SurfaceTexture(
+                (this.mCameraTexture = new SurfaceTexture(
                         this.mTarget = VRDroidBuilder.createTexture()
-                );
+                )).setDefaultBufferSize(VRDroidBuilder.fitPreviewWide(mGvrView.getWidth()), VRDroidBuilder.fitPreviewHigh(mGvrView.getHeight()));
                 try {
                     this.mCamera.setPreviewTexture(this.mCameraTexture);
                 } catch (IOException e) {
@@ -209,7 +190,6 @@ public class VRDroidCamera extends GvrActivity implements GvrView.StereoRenderer
                     return;
                 }
                 // 开始偷窥
-                this.mCamera.setFaceDetectionListener(this);
                 this.mCamera.startPreview();
             }
         }

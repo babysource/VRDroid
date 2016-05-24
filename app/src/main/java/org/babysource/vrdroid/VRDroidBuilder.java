@@ -14,11 +14,15 @@ import javax.microedition.khronos.opengles.GL10;
  */
 public final class VRDroidBuilder {
 
+    final static int GL_CAMERA_OES = 0x8D65;
+
+    final static int MAX_PREVIEW_WIDE = 1920;
+
+    final static int MAX_PREVIEW_HIGH = 1080;
+
     final static String ATTR_POSITION = "a_Position";
 
     final static String ATTR_TEXCOORD = "a_Texcoord";
-
-    final static int GL_CAMERA_OES = 0x8D65;
 
     // 顶点坐标个数
     final static int COORDS_PER_VERTEX = 2;
@@ -73,6 +77,20 @@ public final class VRDroidBuilder {
         GLES20.glTexParameteri(VRDroidBuilder.GL_CAMERA_OES, GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
         GLES20.glTexParameteri(VRDroidBuilder.GL_CAMERA_OES, GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
         return textures[0];
+    }
+
+    final static int fitPreviewWide(final int wide) {
+        if (wide < 0) {
+            return 0;
+        }
+        return wide > MAX_PREVIEW_WIDE ? MAX_PREVIEW_WIDE : wide;
+    }
+
+    final static int fitPreviewHigh(final int high) {
+        if (high < 0) {
+            return 0;
+        }
+        return high > MAX_PREVIEW_HIGH ? MAX_PREVIEW_HIGH : high;
     }
 
     final static int loadGLShader(final int type, final String code) {

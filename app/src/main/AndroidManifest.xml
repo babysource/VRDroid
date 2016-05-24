@@ -29,7 +29,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".VRDroidCamera"
+            android:name=".VRDroidCamera2"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="landscape">
             <intent-filter>
