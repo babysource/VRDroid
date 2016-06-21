@@ -81,7 +81,9 @@ public class VRDroidPlayer extends FragmentActivity {
 
                 });
                 try {
-                    this.mVrVideoView.loadVideo(Uri.fromFile(new File(path)));
+                    this.mVrVideoView.loadVideo(
+                            Uri.fromFile(new File(path)), new VrVideoView.Options()
+                    );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
