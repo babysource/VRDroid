@@ -21,4 +21,4 @@ VR相关探索研究项目，长期关注VR前沿动态，及时跟进最新VR�
 
 [app-vrwidget]：
 
-    GvrView v0.8.0实现VR 360°全景视频播放；
+    GvrView v0.8.1实现VR 360°全景视频播放；
