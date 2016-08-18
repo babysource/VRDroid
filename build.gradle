@@ -1,16 +1,18 @@
 buildscript {
     repositories {
-        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle-experimental:0.6.0'
+        classpath 'com.android.tools.build:gradle-experimental:0.7.2'
     }
 }
 
 allprojects {
     repositories {
-        maven { url 'http://maven.oschina.net/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
         jcenter()
     }
 }

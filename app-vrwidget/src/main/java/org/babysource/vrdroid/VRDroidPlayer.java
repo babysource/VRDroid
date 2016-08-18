@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.google.vr.sdk.widgets.video.VrVideoEventListener;
+import com.google.vr.sdk.widgets.common.VrWidgetView;
 import com.google.vr.sdk.widgets.video.VrVideoView;
 
 import java.io.File;
@@ -76,10 +76,10 @@ public class VRDroidPlayer extends FragmentActivity {
         if (this.mVrVideoView != null) {
             final String path = this.getIntent().getStringExtra(KEY_PATH);
             if (!TextUtils.isEmpty(path)) {
+                this.mVrVideoView.setDisplayMode(
+                        VrWidgetView.DisplayMode.FULLSCREEN_STEREO
+                );
                 this.mVrVideoView.setInfoButtonEnabled(false);
-                this.mVrVideoView.setEventListener(new VrVideoEventListener() {
-
-                });
                 try {
                     this.mVrVideoView.loadVideo(
                             Uri.fromFile(new File(path)), new VrVideoView.Options()
