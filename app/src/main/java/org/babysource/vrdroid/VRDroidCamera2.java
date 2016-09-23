@@ -87,7 +87,6 @@ public class VRDroidCamera2 extends GvrActivity implements GvrView.StereoRendere
             this.mGvrView.setRenderer(this);
             this.mGvrView.setStereoModeEnabled(true);
             this.mGvrView.setTransitionViewEnabled(true);
-            this.mGvrView.setSettingsButtonEnabled(false);
         }
     }
 
