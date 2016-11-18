@@ -48,6 +48,6 @@ dependencies {
     compile project(':libraries:videowidget')
     compile project(':libraries:commonwidget')
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.google.android.exoplayer:exoplayer:r1.5.11'
-    compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+    compile 'com.google.android.exoplayer:exoplayer:r1.5.12'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.1.0'
 }

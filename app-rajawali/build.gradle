@@ -49,6 +49,6 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'org.rajawali3d:rajawali:1.1.505-SNAPSHOT'
-    compile 'org.rajawali3d:vr:1.1.505-SNAPSHOT'
+    compile 'org.rajawali3d:rajawali:1.1.777'
+    compile 'org.rajawali3d:vr:1.1.777'
 }

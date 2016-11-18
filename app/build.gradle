@@ -47,5 +47,5 @@ dependencies {
     compile project(':libraries:base')
     compile project(':libraries:common')
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.google.protobuf.nano:protobuf-javanano:3.0.0-alpha-7'
+    compile 'com.google.protobuf.nano:protobuf-javanano:3.1.0'
 }
